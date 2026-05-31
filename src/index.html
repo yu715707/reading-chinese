@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>汉字认知训练平台</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Microsoft YaHei', 'SimHei', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 800px;
+            width: 100%;
+            padding: 40px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 2em;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #999;
+            margin-bottom: 40px;
+            font-size: 0.95em;
+        }
+
+        .input-section {
+            margin-bottom: 30px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: #333;
+            font-size: 1.1em;
+        }
+
+        .input-group {
+            display: flex;
+            gap: 10px;
+        }
+
+        input[type="text"] {
+            flex: 1;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 1.1em;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        button {
+            padding: 15px 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .error-message {
+            color: #e74c3c;
+            margin-top: 10px;
+            padding: 10px;
+            background: #ffe6e6;
+            border-radius: 8px;
+            display: none;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        .success-message {
+            color: #27ae60;
+            margin-top: 10px;
+            padding: 10px;
+            background: #e8f8f5;
+            border-radius: 8px;
+            display: none;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        .results {
+            margin-top: 30px;
+            display: none;
+        }
+
+        .results.show {
+            display: block;
+        }
+
+        .result-item {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            border-left: 4px solid #667eea;
+        }
+
+        .character-large {
+            font-size: 3em;
+            font-weight: bold;
+            color: #667eea;
+            margin-right: 15px;
+        }
+
+        .result-info {
+            display: flex;
+            align-items: center;
+        }
+
+        .info-text {
+            flex: 1;
+        }
+
+        .info-text h3 {
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .info-text p {
+            color: #666;
+            font-size: 0.9em;
+            margin: 3px 0;
+        }
+
+        .start-btn {
+            background: linear-gradient(135deg, #27ae60 0%, #229954 100%);
+            padding: 10px 20px;
+            font-size: 0.9em;
+            margin-left: 10px;
+            white-space: nowrap;
+        }
+
+        .start-btn:hover {
+            box-shadow: 0 10px 20px rgba(39, 174, 96, 0.3);
+        }
+
+        .examples {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f0f4ff;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+        }
+
+        .examples h4 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .examples p {
+            color: #666;
+            font-size: 0.9em;
+            margin: 5px 0;
+            line-height: 1.6;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            color: #999;
+            font-size: 0.9em;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 1.5em;
+            }
+
+            .input-group {
+                flex-direction: column;
+            }
+
+            .result-info {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .character-large {
+                margin-right: 0;
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📚 汉字认知训练平台</h1>
+        <p class="subtitle">帮助儿童建立完整的汉字认知链路</p>
+
+        <div class="input-section">
+            <label for="characterInput">输入汉字（支持多种输入方式）</label>
+            <div class="input-group">
+                <input 
+                    type="text" 
+                    id="characterInput" 
+                    placeholder="例如：清 或 清情晴 或 说硕拼 或 河、花、跑、跳"
+                    autocomplete="off"
+                >
+                <button onclick="handleInput()">开始学习</button>
+            </div>
+            <div class="error-message" id="errorMessage"></div>
+            <div class="success-message" id="successMessage"></div>
+
+            <div class="examples">
+                <h4>💡 输入示例</h4>
+                <p>✓ 单字：<code>清</code></p>
+                <p>✓ 双字：<code>清 情</code></p>
+                <p>✓ 多字：<code>说硕拼</code></p>
+                <p>✓ 任意分隔：<code>河、花、跑、跳</code> 或 <code>河,花,跑,跳</code></p>
+            </div>
+        </div>
+
+        <div class="results" id="results"></div>
+
+        <div class="footer">
+            <p>💪 为阅读障碍和学习困难儿童打造的汉字学习平台</p>
+            <p style="margin-top: 10px; font-size: 0.85em; color: #bbb;">版本 1.0 | 数据来源：《义务教育语文课程标准（2022版）》</p>
+        </div>
+    </div>
+
+    <script>
+        // 内置的汉字数据库（简化版，用于演示）
+        const charactersDatabase = {
+            清: {
+                char: '清',
+                pinyin: 'qīng',
+                meanings: ['水很干净', '清楚，明白', '安静']
+            },
+            情: {
+                char: '情',
+                pinyin: 'qíng',
+                meanings: ['感受，感情', '情况，状况', '爱好']
+            },
+            晴: {
+                char: '晴',
+                pinyin: 'qíng',
+                meanings: ['天气没有云', '阳光充足', '天气放晴']
+            },
+            请: {
+                char: '请',
+                pinyin: 'qǐng',
+                meanings: ['恳求，要求', '邀请', '有礼貌地表达']
+            },
+            山: {
+                char: '山',
+                pinyin: 'shān',
+                meanings: ['高耸的地形', '山脉', '山地']
+            },
+            水: {
+                char: '水',
+                pinyin: 'shuǐ',
+                meanings: ['液体', '河水', '清水']
+            },
+            火: {
+                char: '火',
+                pinyin: 'huǒ',
+                meanings: ['燃烧', '热', '灾难']
+            },
+            人: {
+                char: '人',
+                pinyin: 'rén',
+                meanings: ['人类', '个人', '人物']
+            },
+            大: {
+                char: '大',
+                pinyin: 'dà',
+                meanings: ['大的', '大小', '年纪大']
+            },
+            小: {
+                char: '小',
+                pinyin: 'xiǎo',
+                meanings: ['小的', '小小', '年纪小']
+            }
+        };
+
+        function parseCharacters(input) {
+            if (!input || typeof input !== 'string') {
+                return [];
+            }
+
+            const allChars = [];
+            for (let char of input) {
+                // 检查是否是汉字
+                if (/[\u4E00-\u9FFF]/.test(char)) {
+                    allChars.push(char);
+                }
+            }
+
+            return allChars;
+        }
+
+        function validateInput(input) {
+            if (!input || typeof input !== 'string') {
+                return {
+                    valid: false,
+                    error: '输入为空，请输入至少一个汉字',
+                    characters: []
+                };
+            }
+
+            const trimmed = input.trim();
+            if (trimmed.length === 0) {
+                return {
+                    valid: false,
+                    error: '输入为空，请输入至少一个汉字',
+                    characters: []
+                };
+            }
+
+            const characters = parseCharacters(trimmed);
+            if (characters.length === 0) {
+                return {
+                    valid: false,
+                    error: '未找到任何汉字，请检查输入',
+                    characters: []
+                };
+            }
+
+            return {
+                valid: true,
+                error: null,
+                characters: characters
+            };
+        }
+
+        function handleInput() {
+            const input = document.getElementById('characterInput').value;
+            const errorDiv = document.getElementById('errorMessage');
+            const successDiv = document.getElementById('successMessage');
+            const resultsDiv = document.getElementById('results');
+
+            // 清除之前的消息
+            errorDiv.classList.remove('show');
+            successDiv.classList.remove('show');
+            resultsDiv.classList.remove('show');
+
+            // 验证输入
+            const validation = validateInput(input);
+            if (!validation.valid) {
+                errorDiv.textContent = '⚠️ ' + validation.error;
+                errorDiv.classList.add('show');
+                return;
+            }
+
+            const characters = validation.characters;
+            const uniqueChars = [...new Set(characters)];
+
+            // 生成结果
+            let html = '';
+            let hasError = false;
+
+            uniqueChars.forEach(char => {
+                const charInfo = charactersDatabase[char];
+                
+                if (!charInfo) {
+                    html += `
+                        <div class="result-item" style="border-left-color: #e74c3c;">
+                            <div class="result-info">
+                                <div class="character-large" style="color: #999;">${char}</div>
+                                <div class="info-text">
+                                    <h3>❌ 无法开始训练</h3>
+                                    <p style="color: #e74c3c;">📋 原因：数据库未收录此汉字</p>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    hasError = true;
+                } else {
+                    html += `
+                        <div class="result-item">
+                            <div class="result-info">
+                                <div class="character-large">${char}</div>
+                                <div class="info-text">
+                                    <h3>${char}</h3>
+                                    <p><strong>拼音：</strong> ${charInfo.pinyin}</p>
+                                    <p><strong>含义：</strong> ${charInfo.meanings[0]}</p>
+                                </div>
+                                <button class="start-btn" onclick="startTraining('${char}')">开始训练</button>
+                            </div>
+                        </div>
+                    `;
+                }
+            });
+
+            if (html) {
+                resultsDiv.innerHTML = html;
+                resultsDiv.classList.add('show');
+            }
+
+            if (!hasError) {
+                successDiv.textContent = `✅ 成功识别 ${uniqueChars.length} 个汉字，点击"开始训练"开始学习`;
+                successDiv.classList.add('show');
+            }
+        }
+
+        function startTraining(char) {
+            alert(`开始训练汉字：${char}\n\n该功能将在下一步实现训练界面后可用。`);
+        }
+
+        // 支持回车键提交
+        document.getElementById('characterInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                handleInput();
+            }
+        });
+    </script>
+</body>
+</html>
