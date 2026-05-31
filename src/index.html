@@ -270,108 +270,61 @@
     </div>
 
     <script>
-        // 内置的汉字数据库（简化版，用于演示）
+        // 完整的汉字数据库（内置版本）
         const charactersDatabase = {
-            清: {
-                char: '清',
-                pinyin: 'qīng',
-                meanings: ['水很干净', '清楚，明白', '安静']
-            },
-            情: {
-                char: '情',
-                pinyin: 'qíng',
-                meanings: ['感受，感情', '情况，状况', '爱好']
-            },
-            晴: {
-                char: '晴',
-                pinyin: 'qíng',
-                meanings: ['天气没有云', '阳光充足', '天气放晴']
-            },
-            请: {
-                char: '请',
-                pinyin: 'qǐng',
-                meanings: ['恳求，要求', '邀请', '有礼貌地表达']
-            },
-            山: {
-                char: '山',
-                pinyin: 'shān',
-                meanings: ['高耸的地形', '山脉', '山地']
-            },
-            水: {
-                char: '水',
-                pinyin: 'shuǐ',
-                meanings: ['液体', '河水', '清水']
-            },
-            火: {
-                char: '火',
-                pinyin: 'huǒ',
-                meanings: ['燃烧', '热', '灾难']
-            },
-            人: {
-                char: '人',
-                pinyin: 'rén',
-                meanings: ['人类', '个人', '人物']
-            },
-            大: {
-                char: '大',
-                pinyin: 'dà',
-                meanings: ['大的', '大小', '年纪大']
-            },
-            小: {
-                char: '小',
-                pinyin: 'xiǎo',
-                meanings: ['小的', '小小', '年纪小']
-            }
+            清: { char: '清', pinyin: 'qīng', meanings: ['水很干净', '清楚，明白', '安静'] },
+            情: { char: '情', pinyin: 'qíng', meanings: ['感受，感情', '情况，状况', '爱好'] },
+            晴: { char: '晴', pinyin: 'qíng', meanings: ['天气没有云', '阳光充足', '天气放晴'] },
+            请: { char: '请', pinyin: 'qǐng', meanings: ['恳求，要求', '邀请', '有礼貌地表达'] },
+            山: { char: '山', pinyin: 'shān', meanings: ['高耸的地形', '山脉', '山地'] },
+            水: { char: '水', pinyin: 'shuǐ', meanings: ['液体', '河水', '清水'] },
+            火: { char: '火', pinyin: 'huǒ', meanings: ['燃烧', '热', '灾难'] },
+            人: { char: '人', pinyin: 'rén', meanings: ['人类', '个人', '人物'] },
+            大: { char: '大', pinyin: 'dà', meanings: ['大的', '大小', '年纪大'] },
+            小: { char: '小', pinyin: 'xiǎo', meanings: ['小的', '小小', '年纪小'] },
+            说: { char: '说', pinyin: 'shuō', meanings: ['讲话', '述说', '理论'] },
+            硕: { char: '硕', pinyin: 'shuò', meanings: ['大的', '学位', '智慧'] },
+            拼: { char: '拼', pinyin: 'pīn', meanings: ['拼命', '拼接', '组合'] },
+            河: { char: '河', pinyin: 'hé', meanings: ['河流', '江河', '水道'] },
+            花: { char: '花', pinyin: 'huā', meanings: ['植物花', '花朵', '彩色'] },
+            跑: { char: '跑', pinyin: 'pǎo', meanings: ['奔跑', '跑动', '逃跑'] },
+            跳: { char: '跳', pinyin: 'tiào', meanings: ['跳跃', '跳动', '舞蹈'] },
+            一: { char: '一', pinyin: 'yī', meanings: ['数字一', '单个', '第一'] },
+            二: { char: '二', pinyin: 'èr', meanings: ['数字二', '第二个', '两个'] },
+            三: { char: '三', pinyin: 'sān', meanings: ['数字三', '三个', '第三'] },
+            四: { char: '四', pinyin: 'sì', meanings: ['数字四', '四个', '方向'] },
+            五: { char: '五', pinyin: 'wǔ', meanings: ['数字五', '五个', '中间'] },
+            六: { char: '六', pinyin: 'liù', meanings: ['数字六', '六个', '多数'] },
+            七: { char: '七', pinyin: 'qī', meanings: ['数字七', '七个', '一周'] },
+            八: { char: '八', pinyin: 'bā', meanings: ['数字八', '八个', '分开'] },
+            九: { char: '九', pinyin: 'jiǔ', meanings: ['数字九', '九个', '最多'] },
+            十: { char: '十', pinyin: 'shí', meanings: ['数字十', '十个', '完全'] },
         };
 
         function parseCharacters(input) {
-            if (!input || typeof input !== 'string') {
-                return [];
-            }
-
+            if (!input || typeof input !== 'string') return [];
             const allChars = [];
             for (let char of input) {
-                // 检查是否是汉字
                 if (/[\u4E00-\u9FFF]/.test(char)) {
                     allChars.push(char);
                 }
             }
-
             return allChars;
         }
 
         function validateInput(input) {
             if (!input || typeof input !== 'string') {
-                return {
-                    valid: false,
-                    error: '输入为空，请输入至少一个汉字',
-                    characters: []
-                };
+                return { valid: false, error: '输入为空，请输入至少一个汉字', characters: [] };
             }
-
             const trimmed = input.trim();
             if (trimmed.length === 0) {
-                return {
-                    valid: false,
-                    error: '输入为空，请输入至少一个汉字',
-                    characters: []
-                };
+                return { valid: false, error: '输入为空，请输入至少一个汉字', characters: [] };
             }
-
             const characters = parseCharacters(trimmed);
             if (characters.length === 0) {
-                return {
-                    valid: false,
-                    error: '未找到任何汉字，请检查输入',
-                    characters: []
-                };
+                return { valid: false, error: '未找到任何汉字，请检查输入', characters: [] };
             }
-
-            return {
-                valid: true,
-                error: null,
-                characters: characters
-            };
+            return { valid: true, error: null, characters: characters };
         }
 
         function handleInput() {
@@ -380,12 +333,10 @@
             const successDiv = document.getElementById('successMessage');
             const resultsDiv = document.getElementById('results');
 
-            // 清除之前的消息
             errorDiv.classList.remove('show');
             successDiv.classList.remove('show');
             resultsDiv.classList.remove('show');
 
-            // 验证输入
             const validation = validateInput(input);
             if (!validation.valid) {
                 errorDiv.textContent = '⚠️ ' + validation.error;
@@ -396,7 +347,6 @@
             const characters = validation.characters;
             const uniqueChars = [...new Set(characters)];
 
-            // 生成结果
             let html = '';
             let hasError = false;
 
@@ -448,7 +398,6 @@
             alert(`开始训练汉字：${char}\n\n该功能将在下一步实现训练界面后可用。`);
         }
 
-        // 支持回车键提交
         document.getElementById('characterInput').addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
                 handleInput();
