@@ -240,6 +240,57 @@
             display: block;
         }
 
+        .multi-select-info {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            color: #856404;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            font-size: 0.9em;
+        }
+
+        .character-nav {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .char-tab {
+            padding: 8px 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-weight: bold;
+        }
+
+        .char-tab.active {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        .char-tab:hover {
+            border-color: #667eea;
+        }
+
+        .sound-btn {
+            padding: 8px 15px;
+            font-size: 0.9em;
+            margin-bottom: 15px;
+            background: #f0f4ff;
+            color: #667eea;
+            border: 2px solid #667eea;
+        }
+
+        .sound-btn:hover {
+            background: #667eea;
+            color: white;
+        }
+
         @media (max-width: 600px) {
             .container {
                 padding: 20px;
@@ -271,6 +322,9 @@
             <button class="btn-secondary" onclick="goBack()">← 返回</button>
         </div>
 
+        <!-- 字符导航 -->
+        <div class="character-nav" id="characterNav"></div>
+
         <div class="character-display">
             <div class="character-large" id="characterDisplay">清</div>
             <div class="character-info" id="characterInfo"></div>
@@ -299,7 +353,8 @@
                 </div>
                 <div class="feedback" id="feedback2"></div>
                 <p style="margin-bottom: 15px; color: #666;">听拼音，选择正确的汉字：</p>
-                <p style="margin-bottom: 20px; font-size: 1.2em; font-weight: bold; color: #667eea;" id="pinyinDisplay"></p>
+                <p style="margin-bottom: 10px; font-size: 1.2em; font-weight: bold; color: #667eea;" id="pinyinDisplay"></p>
+                <button class="sound-btn" onclick="playPronunciation()" title="点击播放发音">🔊 播放发音</button>
                 <div class="options" id="options2"></div>
                 <div class="controls">
                     <button class="btn-primary" id="submitBtn2" onclick="checkAnswer(2)">提交答案</button>
@@ -316,7 +371,8 @@
                     结构识别 - 选择正确的部件
                 </div>
                 <div class="feedback" id="feedback3"></div>
-                <p style="margin-bottom: 15px; color: #666;">这个汉字由哪两个部件组成？</p>
+                <div class="multi-select-info">💡 提示：这个汉字由多个部件组成，请选择所有正确的部件</div>
+                <p style="margin-bottom: 15px; color: #666;">这个汉字由哪些部件组成？</p>
                 <div class="options" id="options3"></div>
                 <div class="controls">
                     <button class="btn-primary" id="submitBtn3" onclick="checkAnswer(3)">提交答案</button>
@@ -346,23 +402,6 @@
             </div>
         </div>
 
-        <!-- 第5关：综合挑战 -->
-        <div class="stage-container" id="stage5">
-            <div class="stage">
-                <div class="stage-title">
-                    <div class="stage-number">5</div>
-                    综合挑战 - 综合测试
-                </div>
-                <div class="feedback" id="feedback5"></div>
-                <p id="challengeQuestion" style="margin-bottom: 20px; color: #666; font-size: 1.1em;"></p>
-                <div class="options" id="options5"></div>
-                <div class="controls">
-                    <button class="btn-primary" id="submitBtn5" onclick="checkAnswer(5)">提交答案</button>
-                    <button class="btn-secondary" onclick="skipStage()">跳过</button>
-                </div>
-            </div>
-        </div>
-
         <!-- 完成屏幕 -->
         <div class="result-screen" id="resultScreen">
             <div class="result-emoji" id="resultEmoji">🎉</div>
@@ -376,7 +415,7 @@
     </div>
 
     <script>
-        // 完整的汉字数据库（与首页相同）
+        // 完整的汉字数据库
         const charactersDatabase = {
             清: { char: '清', pinyin: 'qīng', meanings: ['水很干净', '清楚，明白', '安静'], components: ['氵', '青'] },
             情: { char: '情', pinyin: 'qíng', meanings: ['感受，感情', '情况，状况', '爱好'], components: ['忄', '青'] },
@@ -388,26 +427,76 @@
             人: { char: '人', pinyin: 'rén', meanings: ['人类', '个人', '人物'], components: [] },
             大: { char: '大', pinyin: 'dà', meanings: ['大的', '大小', '年纪大'], components: [] },
             小: { char: '小', pinyin: 'xiǎo', meanings: ['小的', '小小', '年纪小'], components: [] },
+            说: { char: '说', pinyin: 'shuō', meanings: ['讲话', '述说', '理论'], components: ['讠', '兑'] },
+            硕: { char: '硕', pinyin: 'shuò', meanings: ['大的', '学位', '智慧'], components: ['石', '頁'] },
+            拼: { char: '拼', pinyin: 'pīn', meanings: ['拼命', '拼接', '组合'], components: ['扌', '片'] },
+            河: { char: '河', pinyin: 'hé', meanings: ['河流', '江河', '水道'], components: ['氵', '可'] },
+            花: { char: '花', pinyin: 'huā', meanings: ['植物花', '花朵', '彩色'], components: ['艹', '化'] },
+            跑: { char: '跑', pinyin: 'pǎo', meanings: ['奔跑', '跑动', '逃跑'], components: ['足', '包'] },
+            跳: { char: '跳', pinyin: 'tiào', meanings: ['跳跃', '跳动', '舞蹈'], components: ['足', '兆'] },
+            一: { char: '一', pinyin: 'yī', meanings: ['数字一', '单个', '第一'], components: [] },
+            二: { char: '二', pinyin: 'èr', meanings: ['数字二', '第二个', '两个'], components: [] },
+            三: { char: '三', pinyin: 'sān', meanings: ['数字三', '三个', '第三'], components: [] },
+            四: { char: '四', pinyin: 'sì', meanings: ['数字四', '四个', '方向'], components: [] },
+            五: { char: '五', pinyin: 'wǔ', meanings: ['数字五', '五个', '中间'], components: [] },
+            六: { char: '六', pinyin: 'liù', meanings: ['数字六', '六个', '多数'], components: [] },
+            七: { char: '七', pinyin: 'qī', meanings: ['数字七', '七个', '一周'], components: [] },
+            八: { char: '八', pinyin: 'bā', meanings: ['数字八', '八个', '分开'], components: [] },
+            九: { char: '九', pinyin: 'jiǔ', meanings: ['数字九', '九个', '最多'], components: [] },
+            十: { char: '十', pinyin: 'shí', meanings: ['数字十', '十个', '完全'], components: [] },
         };
 
         // 从 URL 参数获取待训练的字
         const urlParams = new URLSearchParams(window.location.search);
-        let targetChar = urlParams.get('char') || '清';
+        let targetChars = (urlParams.get('chars') || '清').split(',').filter(c => c);
+        let currentCharIndex = 0;
+        let targetChar = targetChars[0];
         let currentStage = 1;
         let score = 0;
         let selectedAnswers = {};
+        let selectedComponents = new Set();
 
-        // 初始化
         function init() {
-            if (!charactersDatabase[targetChar]) {
+            if (targetChars.length === 0 || !charactersDatabase[targetChar]) {
                 alert('汉字不存在，返回首页');
                 window.location.href = 'index.html';
                 return;
             }
             
             updateDisplay();
+            generateCharacterNav();
             generateStage1();
             updateProgress();
+        }
+
+        function generateCharacterNav() {
+            const nav = document.getElementById('characterNav');
+            nav.innerHTML = '';
+            targetChars.forEach((char, index) => {
+                const tab = document.createElement('button');
+                tab.className = `char-tab ${index === currentCharIndex ? 'active' : ''}`;
+                tab.textContent = char;
+                tab.onclick = () => switchCharacter(index);
+                nav.appendChild(tab);
+            });
+        }
+
+        function switchCharacter(index) {
+            currentCharIndex = index;
+            targetChar = targetChars[currentCharIndex];
+            currentStage = 1;
+            selectedAnswers = {};
+            selectedComponents = new Set();
+            updateDisplay();
+            generateCharacterNav();
+            generateStage1();
+            updateProgress();
+
+            document.querySelectorAll('.stage-container').forEach(el => {
+                el.classList.remove('active');
+            });
+            document.getElementById('stage1').classList.add('active');
+            document.getElementById('resultScreen').classList.remove('show');
         }
 
         function updateDisplay() {
@@ -417,10 +506,10 @@
         }
 
         function updateProgress() {
-            document.getElementById('progressInfo').textContent = `第 ${currentStage}/5 关`;
+            document.getElementById('progressInfo').textContent = 
+                `字 ${currentCharIndex + 1}/${targetChars.length} | 第 ${currentStage}/4 关`;
         }
 
-        // 第1关：学习关
         function generateStage1() {
             const char = charactersDatabase[targetChar];
             let html = `
@@ -442,12 +531,10 @@
             document.getElementById('learningContent').innerHTML = html;
         }
 
-        // 第2关：字音训练
         function generateStage2() {
             const char = charactersDatabase[targetChar];
             document.getElementById('pinyinDisplay').textContent = char.pinyin;
             
-            // 生成选项（包括正确答案和干扰项）
             const allChars = Object.keys(charactersDatabase);
             const options = [targetChar];
             while (options.length < 4) {
@@ -459,13 +546,19 @@
             options.sort(() => Math.random() - 0.5);
             
             let html = '';
-            options.forEach((char, index) => {
+            options.forEach((char) => {
                 html += `<button class="option-btn" onclick="selectAnswer(2, '${char}')" data-answer="${char}">${char}</button>`;
             });
             document.getElementById('options2').innerHTML = html;
         }
 
-        // 第3关：结构识别（只对合体字）
+        function playPronunciation() {
+            const utterance = new SpeechSynthesisUtterance(targetChar);
+            utterance.lang = 'zh-CN';
+            utterance.rate = 0.8;
+            window.speechSynthesis.speak(utterance);
+        }
+
         function generateStage3() {
             const char = charactersDatabase[targetChar];
             if (char.components.length === 0) {
@@ -473,17 +566,13 @@
                 return;
             }
             
-            // 生成包含正确部件和干扰部件的选项
+            selectedComponents.clear();
+            
             const correctComponents = char.components;
-            const allComponents = ['氵', '忄', '青', '日', '讠', '山', '水', '火', '人', '大', '小'];
-            const options = [];
+            const allComponents = ['氵', '忄', '青', '日', '讠', '山', '水', '火', '人', '大', '小', '石', '頁', '扌', '可', '艹', '化', '足', '包', '兆', '片'];
+            const options = [...correctComponents];
             
-            // 添加正确答案
-            options.push(correctComponents[0]);
-            options.push(correctComponents[1]);
-            
-            // 添加干扰项
-            while (options.length < 4) {
+            while (options.length < 6) {
                 const component = allComponents[Math.floor(Math.random() * allComponents.length)];
                 if (!options.includes(component)) {
                     options.push(component);
@@ -492,13 +581,22 @@
             options.sort(() => Math.random() - 0.5);
             
             let html = '';
-            options.forEach((component, index) => {
-                html += `<button class="option-btn" onclick="selectAnswer(3, '${component}')" data-answer="${component}">${component}</button>`;
+            options.forEach((component) => {
+                html += `<button class="option-btn" onclick="selectComponent('${component}')" data-answer="${component}">${component}</button>`;
             });
             document.getElementById('options3').innerHTML = html;
         }
 
-        // 第4关：结构生成（只对合体字）
+        function selectComponent(component) {
+            if (selectedComponents.has(component)) {
+                selectedComponents.delete(component);
+                event.target.classList.remove('selected');
+            } else {
+                selectedComponents.add(component);
+                event.target.classList.add('selected');
+            }
+        }
+
         function generateStage4() {
             const char = charactersDatabase[targetChar];
             if (char.components.length === 0) {
@@ -506,10 +604,8 @@
                 return;
             }
             
-            // 显示部件
             document.getElementById('componentsDisplay').textContent = char.components.join(' + ');
             
-            // 生成选项
             const allChars = Object.keys(charactersDatabase);
             const options = [targetChar];
             while (options.length < 4) {
@@ -521,38 +617,10 @@
             options.sort(() => Math.random() - 0.5);
             
             let html = '';
-            options.forEach((char, index) => {
+            options.forEach((char) => {
                 html += `<button class="option-btn" onclick="selectAnswer(4, '${char}')" data-answer="${char}">${char}</button>`;
             });
             document.getElementById('options4').innerHTML = html;
-        }
-
-        // 第5关：综合挑战
-        function generateStage5() {
-            const char = charactersDatabase[targetChar];
-            const questions = [
-                `拼音"${char.pinyin}"对应的汉字是？`,
-                `含义"${char.meanings[0]}"对应的汉字是？`,
-                `这个汉字是什么？`
-            ];
-            const question = questions[Math.floor(Math.random() * questions.length)];
-            document.getElementById('challengeQuestion').textContent = question;
-            
-            const allChars = Object.keys(charactersDatabase);
-            const options = [targetChar];
-            while (options.length < 4) {
-                const randomChar = allChars[Math.floor(Math.random() * allChars.length)];
-                if (!options.includes(randomChar)) {
-                    options.push(randomChar);
-                }
-            }
-            options.sort(() => Math.random() - 0.5);
-            
-            let html = '';
-            options.forEach((char, index) => {
-                html += `<button class="option-btn" onclick="selectAnswer(5, '${char}')" data-answer="${char}">${char}</button>`;
-            });
-            document.getElementById('options5').innerHTML = html;
         }
 
         function selectAnswer(stage, answer) {
@@ -564,29 +632,50 @@
         }
 
         function checkAnswer(stage) {
-            const answer = selectedAnswers[stage];
-            if (!answer) {
-                alert('请选择一个答案');
-                return;
-            }
-
-            const correct = answer === targetChar;
+            let isCorrect = false;
             const feedback = document.getElementById(`feedback${stage}`);
             
-            if (correct) {
-                feedback.textContent = '✅ 答对了！';
-                feedback.className = 'feedback show success';
-                score += 20;
-                // 禁用所有选项
+            if (stage === 3) {
+                const char = charactersDatabase[targetChar];
+                const correctSet = new Set(char.components);
+                isCorrect = selectedComponents.size === correctSet.size &&
+                    [...selectedComponents].every(c => correctSet.has(c));
+                
+                if (isCorrect) {
+                    feedback.textContent = '✅ 答对了！';
+                    feedback.className = 'feedback show success';
+                    score += 25;
+                } else {
+                    feedback.textContent = `❌ 答错了，正确答案是：${char.components.join(' + ')}`;
+                    feedback.className = 'feedback show error';
+                }
+                
                 document.querySelectorAll(`#options${stage} .option-btn`).forEach(btn => {
                     btn.disabled = true;
-                    if (btn.dataset.answer === targetChar) {
+                    if (char.components.includes(btn.dataset.answer)) {
                         btn.classList.add('correct');
+                    } else if (selectedComponents.has(btn.dataset.answer)) {
+                        btn.classList.add('incorrect');
                     }
                 });
             } else {
-                feedback.textContent = `❌ 答错了，正确答案是"${targetChar}"`;
-                feedback.className = 'feedback show error';
+                const answer = selectedAnswers[stage];
+                if (!answer) {
+                    alert('请选择一个答案');
+                    return;
+                }
+
+                isCorrect = answer === targetChar;
+                
+                if (isCorrect) {
+                    feedback.textContent = '✅ 答对了！';
+                    feedback.className = 'feedback show success';
+                    score += 25;
+                } else {
+                    feedback.textContent = `❌ 答错了，正确答案是"${targetChar}"`;
+                    feedback.className = 'feedback show error';
+                }
+                
                 document.querySelectorAll(`#options${stage} .option-btn`).forEach(btn => {
                     btn.disabled = true;
                     if (btn.dataset.answer === targetChar) {
@@ -597,7 +686,6 @@
                 });
             }
             
-            // 修改按钮为下一步
             const btn = document.getElementById(`submitBtn${stage}`);
             btn.textContent = '下一关 →';
             btn.onclick = () => nextStage();
@@ -606,25 +694,38 @@
         function nextStage() {
             currentStage++;
             
-            // 隐藏所有关卡
-            document.querySelectorAll('.stage-container').forEach(el => {
-                el.classList.remove('active');
-            });
-            
-            if (currentStage > 5) {
-                showResult();
+            if (currentStage > 4) {
+                if (currentCharIndex < targetChars.length - 1) {
+                    currentCharIndex++;
+                    targetChar = targetChars[currentCharIndex];
+                    currentStage = 1;
+                    selectedAnswers = {};
+                    selectedComponents = new Set();
+                    
+                    updateDisplay();
+                    generateCharacterNav();
+                    generateStage1();
+                    updateProgress();
+
+                    document.querySelectorAll('.stage-container').forEach(el => {
+                        el.classList.remove('active');
+                    });
+                    document.getElementById('stage1').classList.add('active');
+                } else {
+                    showResult();
+                }
             } else {
                 const stageEl = document.getElementById(`stage${currentStage}`);
+                document.querySelectorAll('.stage-container').forEach(el => {
+                    el.classList.remove('active');
+                });
                 stageEl.classList.add('active');
                 
-                // 清除反馈
                 document.getElementById(`feedback${currentStage}`).classList.remove('show');
                 
-                // 生成该关卡
                 if (currentStage === 2) generateStage2();
                 else if (currentStage === 3) generateStage3();
                 else if (currentStage === 4) generateStage4();
-                else if (currentStage === 5) generateStage5();
                 
                 updateProgress();
             }
@@ -640,13 +741,14 @@
             });
             document.getElementById('resultScreen').classList.add('show');
             
-            const grade = Math.round((score / 100) * 100);
-            document.getElementById('resultScore').textContent = `得分: ${score} / 100`;
+            const maxScore = targetChars.length * 100;
+            document.getElementById('resultScore').textContent = `得分: ${score} / ${maxScore}`;
             
-            if (score >= 80) {
+            const percentage = (score / maxScore) * 100;
+            if (percentage >= 80) {
                 document.getElementById('resultEmoji').textContent = '🎉';
                 document.getElementById('resultText').textContent = '太棒了！';
-            } else if (score >= 60) {
+            } else if (percentage >= 60) {
                 document.getElementById('resultEmoji').textContent = '😊';
                 document.getElementById('resultText').textContent = '做得不错！';
             } else {
@@ -656,9 +758,12 @@
         }
 
         function restartTraining() {
+            currentCharIndex = 0;
+            targetChar = targetChars[0];
             currentStage = 1;
             score = 0;
             selectedAnswers = {};
+            selectedComponents = new Set();
             init();
             document.getElementById('resultScreen').classList.remove('show');
             document.getElementById('stage1').classList.add('active');
@@ -668,7 +773,6 @@
             window.location.href = 'index.html';
         }
 
-        // 页面加载时初始化
         window.addEventListener('load', init);
     </script>
 </body>
