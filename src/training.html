@@ -277,20 +277,6 @@
             border-color: #667eea;
         }
 
-        .sound-btn {
-            padding: 8px 15px;
-            font-size: 0.9em;
-            margin-bottom: 15px;
-            background: #f0f4ff;
-            color: #667eea;
-            border: 2px solid #667eea;
-        }
-
-        .sound-btn:hover {
-            background: #667eea;
-            color: white;
-        }
-
         @media (max-width: 600px) {
             .container {
                 padding: 20px;
@@ -354,7 +340,7 @@
                 <div class="feedback" id="feedback2"></div>
                 <p style="margin-bottom: 15px; color: #666;">听拼音，选择正确的汉字：</p>
                 <p style="margin-bottom: 10px; font-size: 1.2em; font-weight: bold; color: #667eea;" id="pinyinDisplay"></p>
-                <button class="sound-btn" onclick="playPronunciation()" title="点击播放发音">🔊 播放发音</button>
+                <button style="padding: 8px 15px; font-size: 0.9em; margin-bottom: 15px; background: #f0f4ff; color: #667eea; border: 2px solid #667eea; border-radius: 8px; cursor: pointer;" onclick="playPronunciation()" title="点击播放发音">🔊 播放发音</button>
                 <div class="options" id="options2"></div>
                 <div class="controls">
                     <button class="btn-primary" id="submitBtn2" onclick="checkAnswer(2)">提交答案</button>
@@ -415,7 +401,7 @@
     </div>
 
     <script>
-        // 完整的汉字数据库
+        // 完整的汉字数据库（内置版本）
         const charactersDatabase = {
             清: { char: '清', pinyin: 'qīng', meanings: ['水很干净', '清楚，明白', '安静'], components: ['氵', '青'] },
             情: { char: '情', pinyin: 'qíng', meanings: ['感受，感情', '情况，状况', '爱好'], components: ['忄', '青'] },
@@ -457,12 +443,14 @@
         let selectedComponents = new Set();
 
         function init() {
-            if (targetChars.length === 0 || !charactersDatabase[targetChar]) {
+            targetChars = targetChars.filter(char => charactersDatabase[char]);
+            if (targetChars.length === 0) {
                 alert('汉字不存在，返回首页');
                 window.location.href = 'index.html';
                 return;
             }
-            
+
+            targetChar = targetChars[currentCharIndex];
             updateDisplay();
             generateCharacterNav();
             generateStage1();
@@ -569,7 +557,7 @@
             selectedComponents.clear();
             
             const correctComponents = char.components;
-            const allComponents = ['氵', '忄', '青', '日', '讠', '山', '水', '火', '人', '大', '小', '石', '頁', '扌', '可', '艹', '化', '足', '包', '兆', '片'];
+            const allComponents = ['氵', '忄', '青', '日', '讠', '山', '水', '火', '人', '大', '小', '石', '頁', '扌', '可', '艹', '化', '足', '包', '兆', '亠', '冖', '冫', '刂', '匸', '匹', '卜', '卩', '廿', '十', '片'];
             const options = [...correctComponents];
             
             while (options.length < 6) {
