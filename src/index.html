@@ -264,7 +264,7 @@
         <div class="results" id="results"></div>
 
         <div class="footer">
-            <p>💪 为阅读障碍和学习困难儿童打造的汉字学习平台</p>
+            <p>💪 为阅���障碍和学习困难儿童打造的汉字学习平台</p>
             <p style="margin-top: 10px; font-size: 0.85em; color: #bbb;">版本 1.0 | 数据来源：《义务教育语文课程标准（2022版）》</p>
         </div>
     </div>
@@ -395,7 +395,8 @@
         }
 
         function startTraining(char) {
-            alert(`开始训练汉字：${char}\n\n该功能将在下一步实现训练界面后可用。`);
+            // 跳转到训练页面，传递要训练的字符
+            window.location.href = `training.html?char=${char}`;
         }
 
         document.getElementById('characterInput').addEventListener('keypress', function(e) {
