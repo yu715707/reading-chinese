@@ -1,0 +1,452 @@
+{
+  "清": {
+    "char": "清",
+    "pinyin": "qīng",
+    "story": "古人观察到水很干净透明，就用水（氵）加上青色（青）来表示清洁。氵代表水，青代表颜色，合在一起就表示清澈的水。",
+    "etymology": "形声字：氵（水部，表示意义）+ 青（表示发音）",
+    "memory_trick": "清=水+青，想象清澈的青色溪水",
+    "related_characters": ["情", "晴", "请"],
+    "usage_examples": [
+      {
+        "sentence": "清水很干净",
+        "meaning": "水很透明清洁"
+      },
+      {
+        "sentence": "思路很清楚",
+        "meaning": "想法明确清晰"
+      }
+    ]
+  },
+  "情": {
+    "char": "情",
+    "pinyin": "qíng",
+    "story": "忄是心字旁，代表心情、感受。青表示发音。古人认为情感来自心灵，所以用心加上青声来表示。",
+    "etymology": "形声字：忄（心部，表示情感）+ 青（表示发音）",
+    "memory_trick": "情=心+青，我们的情感（感情）来自心",
+    "related_characters": ["清", "晴", "请"],
+    "usage_examples": [
+      {
+        "sentence": "很高兴，心情很好",
+        "meaning": "快乐的情感"
+      },
+      {
+        "sentence": "这是什么情况",
+        "meaning": "什么样的状况"
+      }
+    ]
+  },
+  "晴": {
+    "char": "晴",
+    "pinyin": "qíng",
+    "story": "日代表太阳，青代表发音。天晴了就能看到太阳，所以用日（太阳）加青来表示天晴。",
+    "etymology": "形声字：日（日部，表示太阳）+ 青（表示发音）",
+    "memory_trick": "晴=日+青，天晴了太阳（日）就出来了",
+    "related_characters": ["清", "情", "请"],
+    "usage_examples": [
+      {
+        "sentence": "今天天晴了",
+        "meaning": "没有云，天气好"
+      },
+      {
+        "sentence": "天气转晴",
+        "meaning": "从下雨变成晴天"
+      }
+    ]
+  },
+  "请": {
+    "char": "请",
+    "pinyin": "qǐng",
+    "story": "讠是言字旁，代表说话。青表示发音。古人用说话（讠）加青声来表示'请求'，是一个有礼貌的说法。",
+    "etymology": "形声字：讠（言部，表示说话）+ 青（表示发音）",
+    "memory_trick": "请=说话+青，用言辞去请求别人",
+    "related_characters": ["清", "情", "晴"],
+    "usage_examples": [
+      {
+        "sentence": "请坐",
+        "meaning": "有礼貌地邀请"
+      },
+      {
+        "sentence": "请帮忙",
+        "meaning": "礼貌地请求帮助"
+      }
+    ]
+  },
+  "山": {
+    "char": "山",
+    "pinyin": "shān",
+    "story": "山字就是象形字，长得就像三座山峰排在一起。左右两竖是山体的侧面，中间的竖是山顶。古人就按照山的形状来画这个字。",
+    "etymology": "象形字：直接描绘山峰的形状 ⛰",
+    "memory_trick": "山=|||，三条竖看起来就像三座山峰",
+    "related_characters": ["岭", "岩", "崖"],
+    "usage_examples": [
+      {
+        "sentence": "爬山很累",
+        "meaning": "登上高山需要体力"
+      },
+      {
+        "sentence": "高山很冷",
+        "meaning": "海拔高的山气温低"
+      }
+    ]
+  },
+  "水": {
+    "char": "水",
+    "pinyin": "shuǐ",
+    "story": "水字就是象形字，长得像水往下流的样子。上面是水的表面，中间的竖代表水流，下面的两点代表水滴。",
+    "etymology": "象形字：描绘水流的形状 💧",
+    "memory_trick": "水=╋，像水在流动，中间一竖代表水流，下面两点代表水滴",
+    "related_characters": ["河", "湖", "海"],
+    "usage_examples": [
+      {
+        "sentence": "喝水很重要",
+        "meaning": "饮用清水对健康重要"
+      },
+      {
+        "sentence": "水往下流",
+        "meaning": "水的自然流向"
+      }
+    ]
+  },
+  "火": {
+    "char": "火",
+    "pinyin": "huǒ",
+    "story": "火字是象形字，长得就像火焰的形状。上面的部分是火焰舔舐的形状，下面是燃烧的炭火。古人就按照看到的火来画这个字。",
+    "etymology": "象形字：直接描绘火焰的形状 🔥",
+    "memory_trick": "火，看起来就像火焰向上跳跃",
+    "related_characters": ["炎", "烧", "灭"],
+    "usage_examples": [
+      {
+        "sentence": "生火取暖",
+        "meaning": "点燃火来保暖"
+      },
+      {
+        "sentence": "火很烫",
+        "meaning": "火的温度很高"
+      }
+    ]
+  },
+  "人": {
+    "char": "人",
+    "pinyin": "rén",
+    "story": "人字就是象形字，长得像一个人站立的形状。两条斜竖代表两条腿，中间连接代表身体。古人用最简单的线条画出了一个人的轮廓。",
+    "etymology": "象形字：描绘人的形状 👤",
+    "memory_trick": "人，像一个人在站着或走路",
+    "related_characters": ["大", "天", "从"],
+    "usage_examples": [
+      {
+        "sentence": "人很多",
+        "meaning": "有很多个人"
+      },
+      {
+        "sentence": "好人",
+        "meaning": "品行好的人"
+      }
+    ]
+  },
+  "大": {
+    "char": "大",
+    "pinyin": "dà",
+    "story": "大字是象形字，就像一个人张开双手的样子，表示很大、很广。上面是头，两边的横是张开的手臂，下面的竖是身体。",
+    "etymology": "象形字：人张开双臂的形状，表示很大 🤸",
+    "memory_trick": "大=▲，像一个人张开双手，表示这个东西很大",
+    "related_characters": ["小", "大小", "太"],
+    "usage_examples": [
+      {
+        "sentence": "大象很大",
+        "meaning": "体型非常庞大"
+      },
+      {
+        "sentence": "大人",
+        "meaning": "成年的人"
+      }
+    ]
+  },
+  "小": {
+    "char": "小",
+    "pinyin": "xiǎo",
+    "story": "小字是象形字，长得像一些小东西聚在一起。三个小点代表细小的粒子或多个小东西。和'大'相反，表示不大、很小。",
+    "etymology": "象形字：几个小粒子或小东西聚集 ⋅⋅⋅",
+    "memory_trick": "小，中间有三个小点，代表小的东西",
+    "related_characters": ["大", "少", "细"],
+    "usage_examples": [
+      {
+        "sentence": "小猫很可爱",
+        "meaning": "小的、年幼的猫"
+      },
+      {
+        "sentence": "小孩",
+        "meaning": "年幼的孩子"
+      }
+    ]
+  },
+  "说": {
+    "char": "说",
+    "pinyin": "shuō",
+    "story": "讠是言字旁，代表说话、言语。兑表示发音。古人用'说'来表示用言语来表达、述说的动作。",
+    "etymology": "形声字：讠（言部，表示说话）+ 兑（表示发音）",
+    "memory_trick": "说=说话+兑，用言辞去说话和表达",
+    "related_characters": ["话", "讲", "述"],
+    "usage_examples": [
+      {
+        "sentence": "请你说话",
+        "meaning": "用言语表达"
+      },
+      {
+        "sentence": "说故事",
+        "meaning": "讲述一个故事"
+      }
+    ]
+  },
+  "河": {
+    "char": "河",
+    "pinyin": "hé",
+    "story": "氵是水字旁，代表水。可表示发音。河是大量水流的地方，所以用水字旁加可来表示河流。",
+    "etymology": "形声字：氵（水部，表示水流）+ 可（表示发音）",
+    "memory_trick": "河=水+可，河是一条可以流水的地方",
+    "related_characters": ["河流", "河水", "海"],
+    "usage_examples": [
+      {
+        "sentence": "黄河很长",
+        "meaning": "中国的黄河是很长的河流"
+      },
+      {
+        "sentence": "渡河",
+        "meaning": "过河、穿过河"
+      }
+    ]
+  },
+  "花": {
+    "char": "花",
+    "pinyin": "huā",
+    "story": "艹是草字头，代表植物。化表示发音。花是从植物上生长出来的，所以用草字头加化来表示花朵。",
+    "etymology": "形声字：艹（草部，表示植物）+ 化（表示发音）",
+    "memory_trick": "花=草+化，植物长出来的彩色东西就是花",
+    "related_characters": ["花朵", "开花", "鲜花"],
+    "usage_examples": [
+      {
+        "sentence": "春天开花",
+        "meaning": "春季植物绽放花朵"
+      },
+      {
+        "sentence": "美丽的花",
+        "meaning": "好看的花卉"
+      }
+    ]
+  },
+  "跑": {
+    "char": "跑",
+    "pinyin": "pǎo",
+    "story": "足是足字旁，代表脚、走路。包表示发音。跑是用脚快速移动的动作，所以用足字旁加包来表示跑。",
+    "etymology": "形声字：足（足部，表示脚）+ 包（表示发音）",
+    "memory_trick": "跑=脚+包，用脚快速移动就是跑步",
+    "related_characters": ["跳", "走", "奔"],
+    "usage_examples": [
+      {
+        "sentence": "跑步很快",
+        "meaning": "用脚快速移动"
+      },
+      {
+        "sentence": "在操场跑",
+        "meaning": "在运动场地上跑动"
+      }
+    ]
+  },
+  "跳": {
+    "char": "跳",
+    "pinyin": "tiào",
+    "story": "足是足字旁，代表脚。兆表示发音。跳是用脚离开地面的动作，所以用足字旁加兆来表示跳跃。",
+    "etymology": "形声字：足（足部，表示脚）+ 兆（表示发音）",
+    "memory_trick": "跳=脚+兆，用脚向上跳起来",
+    "related_characters": ["跑", "跨", "飞"],
+    "usage_examples": [
+      {
+        "sentence": "跳起来",
+        "meaning": "向上跳跃"
+      },
+      {
+        "sentence": "跳舞很开心",
+        "meaning": "做跳跃的舞蹈动作"
+      }
+    ]
+  },
+  "一": {
+    "char": "一",
+    "pinyin": "yī",
+    "story": "一字是最简单的数字汉字，就是一条横线。代表数字1。这是中文里最简洁的数字表示方法。",
+    "etymology": "象形字：一条线代表数字1",
+    "memory_trick": "一=━，一条横线就代表数字1",
+    "related_characters": ["二", "三", "十"],
+    "usage_examples": [
+      {
+        "sentence": "一个苹果",
+        "meaning": "只有一个"
+      },
+      {
+        "sentence": "第一名",
+        "meaning": "最前面的排名"
+      }
+    ]
+  },
+  "二": {
+    "char": "二",
+    "pinyin": "èr",
+    "story": "二字是最简单的数字汉字之一，就是两条横线。代表数字2。比一多一条线。",
+    "etymology": "象形字：两条线代表数字2",
+    "memory_trick": "二=━━，两条横线就代表数字2",
+    "related_characters": ["一", "三", "两"],
+    "usage_examples": [
+      {
+        "sentence": "二个球",
+        "meaning": "两个球"
+      },
+      {
+        "sentence": "第二名",
+        "meaning": "排在第二的位置"
+      }
+    ]
+  },
+  "三": {
+    "char": "三",
+    "pinyin": "sān",
+    "story": "三字就是三条横线。代表数字3。这样数一数就很清楚了：一条线是1，两条线是2，三条线就是3。",
+    "etymology": "象形字：三条线代表数字3",
+    "memory_trick": "三=━━━，三条横线就代表数字3",
+    "related_characters": ["一", "二", "四"],
+    "usage_examples": [
+      {
+        "sentence": "三个人",
+        "meaning": "三个个体的人"
+      },
+      {
+        "sentence": "第三天",
+        "meaning": "隔了两天之后"
+      }
+    ]
+  },
+  "四": {
+    "char": "四",
+    "pinyin": "sì",
+    "story": "四字是象形字，长得像一个方框。四个边代表数字4的四个方向。也表示完整的四面体。",
+    "etymology": "象形字：四个方向形成的方框",
+    "memory_trick": "四=□，一个方框有四个角和四条边",
+    "related_characters": ["三", "五", "方"],
+    "usage_examples": [
+      {
+        "sentence": "四个季节",
+        "meaning": "春夏秋冬四个季节"
+      },
+      {
+        "sentence": "第四个",
+        "meaning": "排在第四位"
+      }
+    ]
+  },
+  "五": {
+    "char": "五",
+    "pinyin": "wǔ",
+    "story": "五字就是象形字，像一个数字5。中间的竖代表中点，上下各有两个突起，代表数字5的形状。",
+    "etymology": "象形字：描绘数字5的形状",
+    "memory_trick": "五，像数字5，有一个中心和四个方向的分布",
+    "related_characters": ["四", "六", "五角"],
+    "usage_examples": [
+      {
+        "sentence": "五个手指",
+        "meaning": "一只手有五根手指"
+      },
+      {
+        "sentence": "五一劳动节",
+        "meaning": "5月1日的节日"
+      }
+    ]
+  },
+  "六": {
+    "char": "六",
+    "pinyin": "liù",
+    "story": "六字是数字汉字，代表数字6。形状像上面有一个横，下面是一个方框的样子，表示数字6。",
+    "etymology": "象形字：描绘数字6",
+    "memory_trick": "六，像一个数字6的形状",
+    "related_characters": ["五", "七", "六边形"],
+    "usage_examples": [
+      {
+        "sentence": "六个月",
+        "meaning": "半年的时间长度"
+      },
+      {
+        "sentence": "六月天气",
+        "meaning": "农历六月或公历六月的天气"
+      }
+    ]
+  },
+  "七": {
+    "char": "七",
+    "pinyin": "qī",
+    "story": "七字是数字汉字，代表数字7。上面像一个横，下面像一个弧形，表示数字7的形状。",
+    "etymology": "象形字：数字7的形状",
+    "memory_trick": "七，像数字7：一条横线加一个弧形",
+    "related_characters": ["六", "八", "七夕"],
+    "usage_examples": [
+      {
+        "sentence": "七天假",
+        "meaning": "一周七天的休息"
+      },
+      {
+        "sentence": "七岁小孩",
+        "meaning": "7岁的儿童"
+      }
+    ]
+  },
+  "八": {
+    "char": "八",
+    "pinyin": "bā",
+    "story": "八字就像两条线向外分开，表示分裂、分开的意思。也是数字8，代表数字8。形状像一个倒三角形。",
+    "etymology": "象形字：两条线分开，代表分裂和数字8",
+    "memory_trick": "八，像一个倒三角形，两条线向外分开",
+    "related_characters": ["七", "九", "分"]
+    "usage_examples": [
+      {
+        "sentence": "八个苹果",
+        "meaning": "8个苹果"
+      },
+      {
+        "sentence": "八月是夏天",
+        "meaning": "农历八月或公历八月"
+      }
+    ]
+  },
+  "九": {
+    "char": "九",
+    "pinyin": "jiǔ",
+    "story": "九字是最后一个单位数字，代表数字9。形状像上面有一个弯钩，下面是一个竖，表示快要到十了。",
+    "etymology": "象形字：数字9的形状",
+    "memory_trick": "九，像数字9：一个弧形加一个竖",
+    "related_characters": ["八", "十", "九州"],
+    "usage_examples": [
+      {
+        "sentence": "九个球",
+        "meaning": "9个球"
+      },
+      {
+        "sentence": "九州大地",
+        "meaning": "中国古代对九个地区的统称"
+      }
+    ]
+  },
+  "十": {
+    "char": "十",
+    "pinyin": "shí",
+    "story": "十字就是一竖加一横，形成一个十字。代表数字10。是十进制的开始，从十开始就要用两个符号了。",
+    "etymology": "象形字：竖横相交形成十字，代表数字10",
+    "memory_trick": "十=╋，一竖一横相交就是数字10",
+    "related_characters": ["九", "百", "十位"],
+    "usage_examples": [
+      {
+        "sentence": "十个人",
+        "meaning": "10个人"
+      },
+      {
+        "sentence": "十一国庆",
+        "meaning": "10月1日国庆节"
+      }
+    ]
+  }
+}
